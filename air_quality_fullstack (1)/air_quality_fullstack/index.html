@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AirSight | Air Quality Intelligence</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-mark">◉</span> AirSight</a><span class="top-note">AIR QUALITY INTELLIGENCE</span></header>
+<main class="container">
+  <section class="hero">
+    <div><p class="eyebrow">ENVIRONMENTAL ANALYTICS PLATFORM</p><h1>Understand the air.<br><span>Predict what comes next.</span></h1>
+    <p class="intro">Upload your AirQualityUCI dataset to predict carbon monoxide levels and detect unusual pollution hours using machine learning.</p></div>
+    <div class="hero-art" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="air-lines">〰<br>〰<br>〰</div></div>
+  </section>
+  <section class="upload-panel">
+    <div class="section-heading"><div><p class="eyebrow">01 / DATA INPUT</p><h2>Upload your dataset</h2></div><span class="file-type">XLSX · XLS</span></div>
+    <label class="dropzone" for="dataset"><span class="upload-icon">↑</span><strong>Choose your AirQualityUCI Excel file</strong><span>or drag and drop it here</span><small>Expected columns: Date, Time, CO(GT), PT08 sensors, T, RH and AH</small><input id="dataset" type="file" accept=".xlsx,.xls"></label>
+    <div class="upload-actions"><span id="file-name">No file selected</span><button id="analyze-btn" disabled>Analyze dataset <span>→</span></button></div>
+    <p id="status" class="status" role="status">Your file is processed in this session and is not saved by this demo.</p>
+  </section>
+  <section id="results" class="results hidden">
+    <div class="section-heading"><div><p class="eyebrow">02 / ANALYSIS</p><h2>Air quality overview</h2></div><span class="live-pill">● ANALYSIS COMPLETE</span></div>
+    <div class="metric-grid">
+      <article class="metric"><span>Usable hourly records</span><strong id="usable">—</strong><small>After cleaning and feature creation</small></article>
+      <article class="metric"><span>Test records</span><strong id="test-count">—</strong><small>Last 20% of the timeline</small></article>
+      <article class="metric"><span>Unusual hours</span><strong id="flag-count">—</strong><small>Large prediction residuals</small></article>
+      <article class="metric"><span>Both detectors</span><strong id="both-count">—</strong><small>Flagged by both methods</small></article>
+    </div>
+    <div class="panel"><div class="panel-title"><div><p class="eyebrow">MODEL PERFORMANCE</p><h3>Model comparison</h3></div></div><div class="table-wrap"><table><thead><tr><th>Model</th><th>MAE</th><th>RMSE</th><th>R²</th></tr></thead><tbody id="metrics-body"></tbody></table></div></div>
+    <div class="chart-grid">
+      <div class="panel"><p class="eyebrow">PREDICTION</p><h3>Actual vs predicted CO(GT)</h3><canvas id="prediction-chart"></canvas></div>
+      <div class="panel"><p class="eyebrow">MODEL INSIGHT</p><h3>Feature importance</h3><canvas id="importance-chart"></canvas></div>
+    </div>
+    <div class="panel"><div class="panel-title"><div><p class="eyebrow">ANOMALY DETECTION</p><h3>Unusual pollution hours</h3><p class="muted">Residual threshold and Isolation Forest results from the test period.</p></div><button id="download-btn" class="secondary">Download flagged hours ↓</button></div>
+      <div class="table-wrap"><table><thead><tr><th>Date & time</th><th>Actual CO</th><th>Predicted CO</th><th>Error</th><th>Detection</th><th>Interpretation</th></tr></thead><tbody id="flags-body"></tbody></table></div>
+      <p class="disclaimer">A detected anomaly is an analytical alert, not proof of a hazardous event or an official air-quality warning. Verify findings with authoritative monitoring data.</p>
+    </div>
+  </section>
+</main>
+<footer>AirSight · Machine-learning demonstration for environmental data analysis</footer>
+<script src="script.js"></script>
+</body></html>
